@@ -6,8 +6,8 @@ import MediaQuery, { useMediaQuery } from 'react-responsive';
 import ChatListView from '../views/chats';
 import PeopleView from '../views/people';
 import ChatView from '../views/chat';
-import Splash from '../views/splash';
-import { SignInUpView } from '../views/auth';
+import SplashView from '../views/splash';
+import { SignInUpView, ForgotPasswordView } from '../views/auth';
 
 import AuthorisedRoute from '../components/authorised-route';
 import withNavigation from '../components/hoc/withNavigation';
@@ -40,6 +40,14 @@ function App({ location, navigateTo, goBack }) {
         exact
         path={['/sign-in', '/sign-up']}
         render={props => <SignInUpView {...props} navigateTo={navigateTo} />}
+      />
+
+      <Route
+        exact
+        path="/forgot-password"
+        render={props => (
+          <ForgotPasswordView {...props} navigateTo={navigateTo} />
+        )}
       />
 
       <AuthorisedRoute
@@ -105,7 +113,7 @@ function App({ location, navigateTo, goBack }) {
   }, [messages]);
 
   return isLoading ? (
-    <Splash />
+    <SplashView />
   ) : (
     <>
       {/** MOBILE AND TABLET */}
