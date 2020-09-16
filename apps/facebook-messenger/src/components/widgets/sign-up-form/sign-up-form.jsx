@@ -14,7 +14,7 @@ function SignUpForm({ auth }) {
   const onFormSubmit = async event => {
     event.preventDefault();
     setIsSigningUp(true);
-    // await auth.signIn(emailAddress, password);
+    await auth.signUp({ displayName, emailAddress, password });
     setIsSigningUp(false);
   };
 

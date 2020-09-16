@@ -6,6 +6,7 @@ import {
   auth,
   getCurrentUser,
   createUserProfileDocument,
+  googleSignInProvider,
 } from '../../firebase';
 
 const initialState = {
@@ -31,6 +32,7 @@ function reducer(state = initialState, action) {
       };
     case 'SIGN_UP_FAILURE':
     case 'SIGN_IN_FAILURE':
+    case 'SIGN_OUT_FAILURE':
       return {
         ...state,
         isLoading: false,
@@ -68,7 +70,7 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const signIn = async (emailAddress, password) => {
+  const signIn = async ({ emailAddress, password }) => {
     dispatch({ type: 'SIGN_IN_START' });
     try {
       const { user: userAuth } = await auth.signInWithEmailAndPassword(
@@ -84,9 +86,31 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const signOut = () => {
+  const signInWithGoogle = async () => {
+    dispatch({ type: 'SIGN_IN_START' });
+    try {
+      const { user: userAuth } = auth.signInWithPopup(googleSignInProvider);
+
+      await getSnapshotFromUserAuth(userAuth);
+      return true;
+    } catch (error) {
+      dispatch({ type: 'SIGN_IN_FAILURE', error });
+      return false;
+    }
+  };
+
+  const signOut = async () => {
     localStorage.clear();
-    dispatch({ type: 'SIGN_OUT' });
+    return await auth
+      .signOut()
+      .then(() => {
+        dispatch({ type: 'SIGN_OUT' });
+        return true;
+      })
+      .catch(error => {
+        dispatch({ type: 'SIGN_OUT_FAILURE', error });
+        return false;
+      });
   };
 
   const signUp = async ({ displayName, email, password }) => {
@@ -105,7 +129,6 @@ export function AuthProvider({ children }) {
   };
 
   const verify = async () => {
-    console.log('Verify!');
     try {
       const userAuth = await getCurrentUser();
       if (!userAuth) {
@@ -131,6 +154,7 @@ export function AuthProvider({ children }) {
         isGuest: state.user === null,
         signUp,
         signIn,
+        signInWithGoogle,
         signOut,
         verify,
       }}

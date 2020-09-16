@@ -13,7 +13,13 @@ function SignInForm({ auth }) {
   const onFormSubmit = async event => {
     event.preventDefault();
     setIsSigningIn(true);
-    await auth.signIn(emailAddress, password);
+    await auth.signIn({ emailAddress, password });
+    setIsSigningIn(false);
+  };
+
+  const onSignInWithGoogleClicked = async () => {
+    setIsSigningIn(true);
+    await auth.signInWithGoogle();
     setIsSigningIn(false);
   };
 
@@ -83,23 +89,29 @@ function SignInForm({ auth }) {
           Create an account
         </Link>
         &nbsp;
-        <Link to="/forgotten-password" style={{ textTransform: 'initial' }}>
+        <Link to="/forgot-password" style={{ textTransform: 'initial' }}>
           Forgot password?
         </Link>
       </div>
 
       <div style={{ position: 'relative' }}>
-        <hr style={{ margin: '32px 0', borderColor: 'rgba(0, 0, 0, 0.04)' }} />
+        <hr
+          style={{
+            margin: '32px 0',
+            border: 'none',
+            borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+          }}
+        />
         <h5
           style={{
             position: 'absolute',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%,-50%)',
-            backgroundColor: '#fff',
+            backgroundColor: '#f5f5f5',
             padding: '5px 10px',
             margin: 0,
-            lineHeight: 0.8,
+            lineHeight: 1,
             fontWeight: 400,
           }}
         >
@@ -107,7 +119,7 @@ function SignInForm({ auth }) {
         </h5>
       </div>
 
-      <Button block disabled={isSigningIn}>
+      <Button block onClick={onSignInWithGoogleClicked} disabled={isSigningIn}>
         Sign in with Google
       </Button>
     </form>
