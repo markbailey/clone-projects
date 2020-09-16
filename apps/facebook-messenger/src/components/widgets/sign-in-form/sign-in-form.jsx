@@ -71,9 +71,22 @@ function SignInForm({ auth }) {
       <Button type="submit" block primary disabled={isSigningIn}>
         {isSigningIn ? 'Signing in...' : 'Sign in with email'}
       </Button>
-      <Link to="/sign-up" style={{ textTransform: 'initial' }}>
-        I don't have an account
-      </Link>
+
+      <div
+        style={{
+          textTransform: 'initial',
+          textAlign: 'center',
+          marginTop: 8,
+        }}
+      >
+        <Link to="/sign-up" style={{ textTransform: 'initial' }}>
+          Create an account
+        </Link>
+        &nbsp;
+        <Link to="/forgotten-password" style={{ textTransform: 'initial' }}>
+          Forgot password?
+        </Link>
+      </div>
 
       <div style={{ position: 'relative' }}>
         <hr style={{ margin: '32px 0', borderColor: 'rgba(0, 0, 0, 0.04)' }} />

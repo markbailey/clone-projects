@@ -91,17 +91,15 @@ function SignUpForm({ auth }) {
         {isSigningUp ? 'Signing up...' : 'Sign up with email'}
       </Button>
 
-      <Link
-        to="/sign-in"
+      <div
         style={{
-          display: 'inline-block',
           textTransform: 'initial',
-          margin: '8px auto 0',
-          transform: 'translateX(50%)',
+          textAlign: 'center',
+          marginTop: 8,
         }}
       >
-        I already have an account
-      </Link>
+        <Link to="/sign-in">I already have an account</Link>
+      </div>
     </form>
   );
 }
