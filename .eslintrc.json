@@ -1,0 +1,38 @@
+{
+  "parser": "babel-eslint",
+  "plugins": ["react-hooks"],
+  "extends": "airbnb",
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "jsx-a11y/label-has-for": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "arrow-parens": ["error", "as-needed"],
+    "object-curly-newline": [
+      "error",
+      {
+        "ObjectExpression": {
+          "multiline": true
+        },
+        "ObjectPattern": {
+          "multiline": true
+        },
+        "ImportDeclaration": "never",
+        "ExportDeclaration": {
+          "multiline": true,
+          "minProperties": 3
+        }
+      }
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "no-plusplus": "off"
+  },
+  "globals": {
+    "localStorage": true
+  }
+}
