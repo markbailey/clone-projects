@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Icon from '../icon';
+import Icon from '../tags/icon';
 
 import { NavbarWrapper, NavbarButton } from './styled.components';
 

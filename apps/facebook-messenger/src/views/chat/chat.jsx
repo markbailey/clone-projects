@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 
-import Input from '../../components/input';
-import Icon from '../../components/icon';
-import Button from '../../components/button';
+import Input from '../../components/tags/input';
+import Icon from '../../components/tags/icon';
+import Button from '../../components/tags/button';
 import Message from '../../components/chat-message';
 
 import ChatContext from '../../context/chat';

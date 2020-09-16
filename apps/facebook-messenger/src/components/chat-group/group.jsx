@@ -3,8 +3,8 @@ import 'styled-components/macro';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Icon from '../icon';
-import Button from '../button';
+import Icon from '../tags/icon';
+import Button from '../tags/button';
 
 import { noPointerEvents } from '../../css.stylesheet';
 

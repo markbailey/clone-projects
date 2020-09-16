@@ -1,7 +1,7 @@
 import React, { useContext, memo } from 'react';
 import PropTypes from 'prop-types';
 
-import Button from '../../components/button';
+import Button from '../../components/tags/button';
 import Aside, {
   AsideHeader,
   AsideContent,

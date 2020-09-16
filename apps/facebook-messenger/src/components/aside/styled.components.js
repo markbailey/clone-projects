@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import Button from '../button';
+import Button from '../tags/button';
 
 export const ViewWrapper = styled.div`
   display: flex;

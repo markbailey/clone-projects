@@ -3,9 +3,9 @@
 import React, { useState, useContext, createRef, memo } from 'react';
 import PropTypes from 'prop-types';
 
-import Input from '../../components/input';
-import Icon from '../../components/icon';
-import Button from '../../components/button';
+import Input from '../../components/tags/input';
+import Icon from '../../components/tags/icon';
+import Button from '../../components/tags/button';
 import Aside, {
   AsideHeader,
   AsideContent,
