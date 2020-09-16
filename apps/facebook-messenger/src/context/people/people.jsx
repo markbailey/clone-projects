@@ -45,7 +45,6 @@ export function PeopleProvider({ children }) {
     });
 
   useEffect(() => {
-    console.log('People!', user);
     if (user) {
       firestore
         .collection('contacts')
