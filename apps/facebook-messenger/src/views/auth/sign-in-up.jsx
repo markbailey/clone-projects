@@ -7,7 +7,7 @@ import SignUpForm from '../../components/widgets/sign-up-form';
 import { ViewWrapper, LogoWrapper } from './styled.components';
 import AuthContext from '../../context/auth';
 
-function SignInUp() {
+function SignInUpView() {
   const auth = useContext(AuthContext);
 
   return auth.isGuest ? (
@@ -50,4 +50,4 @@ function SignInUp() {
   );
 }
 
-export default SignInUp;
+export default SignInUpView;

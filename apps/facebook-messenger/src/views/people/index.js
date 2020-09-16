@@ -1,2 +1,2 @@
-import People from './people'
-export default People;
+import PeopleView from './people'
+export default PeopleView;

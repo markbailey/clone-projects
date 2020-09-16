@@ -1,6 +1,7 @@
-import {
-  default as SignInUpView
-} from './sign-in-up'
+import SignInUpView from './sign-in-up';
+import ForgotPasswordView from './forgot-password';
+
 export {
-  SignInUpView
-}
+  SignInUpView,
+  ForgotPasswordView
+};

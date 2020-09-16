@@ -6,7 +6,7 @@ import {
   PoweredByWrapper,
 } from './styled.components';
 
-function Splash() {
+function SplashView() {
   return (
     <ViewWrapper>
       <LogoWrapper>
@@ -21,4 +21,4 @@ function Splash() {
   );
 }
 
-export default Splash;
+export default SplashView;
