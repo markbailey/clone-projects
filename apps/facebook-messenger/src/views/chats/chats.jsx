@@ -1,16 +1,17 @@
 // import 'styled-components/macro';
 
-import React, { useState, useContext, createRef, memo } from 'react';
+import React, { useState, useContext, useEffect, createRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Input from '../../components/tags/input';
-import Icon from '../../components/tags/icon';
-import Button from '../../components/tags/button';
 import Aside, {
   AsideHeader,
   AsideContent,
   AsideNavbar,
 } from '../../components/aside';
+import Input from '../../components/tags/input';
+import Icon from '../../components/tags/icon';
+import Button from '../../components/tags/button';
 import PeopleSearchResults from '../../components/people-search-results';
 
 import ChatContext from '../../context/chat';
@@ -40,7 +41,8 @@ function ChatsView({
   const [searchFocused, setSearchFocused] = useState(false);
   const [searchCriteria, setSearchCriteria] = useState('');
 
-  const { chats } = chatState;
+  const location = useLocation();
+  const { chats, messages } = chatState;
 
   const onSearchBoxFocusBlur = event =>
     setSearchFocused(event.type === 'focus');
@@ -54,6 +56,14 @@ function ChatsView({
     onCloseNewMessage();
     goBack();
   };
+
+  useEffect(() => {
+    if (!isTabletOrMobile) {
+      console.log('Messages:Changed!', messages.length);
+      if (messages.length > 0 && location.pathname === '/')
+        navigateTo(`/t/${messages[0].recipient}`);
+    }
+  }, [messages, isTabletOrMobile, location, navigateTo]);
 
   // useEffect(() => {
   //   return () => {};
@@ -74,6 +84,7 @@ function ChatsView({
             title="People"
             icon="people"
             iconSize={24}
+            iconButton
             onClick={() => navigateTo('people')}
           />
         ) : null}
@@ -82,6 +93,7 @@ function ChatsView({
           title="Create new message"
           icon="create"
           iconSize={24}
+          iconButton
           onClick={newChat ? null : onCreateMessageClick}
           disabled={newChat}
         />
@@ -94,6 +106,7 @@ function ChatsView({
             value={searchCriteria}
             placeholder="Search Messenger"
             title="Search messenger"
+            rounded
             startAdornment={
               <Icon name="search" size={24} style={{ color: '#9197a3' }} />
             }
@@ -116,7 +129,7 @@ function ChatsView({
       </AsideContent>
 
       {isTabletOrMobile ? (
-        <AsideNavbar onButtonClick={slug => navigateTo(slug)} />
+        <AsideNavbar activeIndex={0} onButtonClick={slug => navigateTo(slug)} />
       ) : null}
     </Aside>
   );
@@ -124,4 +137,4 @@ function ChatsView({
 
 ChatsView.propTypes = propTypes;
 ChatsView.defaultPropsTypes = { newChat: false };
-export default memo(ChatsView);
+export default ChatsView;

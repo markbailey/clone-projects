@@ -29,7 +29,7 @@ function withNavigation(WrappedComponent) {
 
           path =
             current.length > 1
-              ? `${current.replace(/((new)|(t\/.*))$/g, '')}/${slug}`
+              ? `${current.replace(/\/((new)|(t\/.*))$/g, '')}/${slug}`
               : slug;
           break;
         case 'people':

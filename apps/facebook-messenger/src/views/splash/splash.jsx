@@ -11,7 +11,7 @@ function SplashView() {
     <ViewWrapper>
       <LogoWrapper>
         <img src="/logo192.png" alt="logo 192px" style={{ marginBottom: 32 }} />
-        <h1 style={{ margin: 0 }}>Facebook Messenger Clone</h1>
+        <h1 style={{ margin: 0, fontWeight: 400 }}>Facebook Messenger Clone</h1>
       </LogoWrapper>
 
       <PoweredByWrapper>

@@ -66,20 +66,22 @@ function ComposeMessage({ disabled, onSendMessage }) {
       ) : null}
 
       <Input
+        title="Message to send"
         value={message}
         placeholder="Type a message..."
         onChange={e => setMessage(e.target.value)}
+        rounded
         required
         endAdornment={
           <Button
             icon="emoji_emotions"
             title="Choose an emoji"
             iconSize={24}
+            iconButton
             disabled={disabled}
             onClick={() => setShowEmojis(!showEmojis)}
           />
         }
-        title="Message to send"
       />
 
       {message ? (
@@ -87,6 +89,8 @@ function ComposeMessage({ disabled, onSendMessage }) {
           type="submit"
           icon="send"
           title="Send message"
+          iconButton
+          iconSize={24}
           css={marginLeft}
           disabled={disabled}
         />
@@ -94,6 +98,8 @@ function ComposeMessage({ disabled, onSendMessage }) {
         <Button
           icon="thumb_up"
           title="Send a like"
+          iconButton
+          iconSize={24}
           css={marginLeft}
           disabled={disabled}
         />

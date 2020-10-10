@@ -25,7 +25,7 @@ const propTypes = {
 function ChatView({ isNew, goBack }) {
   const { state: chatState } = useContext(ChatContext);
 
-  const { messages, chats } = chatState;
+  const { messages /*, chats*/ } = chatState;
   const { breakpoints } = constants;
 
   const params = useParams();
@@ -51,6 +51,7 @@ function ChatView({ isNew, goBack }) {
       <HeaderBar>
         {isTabletOrMobile ? (
           <Button
+            iconButton
             icon="arrow_back"
             title="Return to chat list"
             css={marginRight}

@@ -9,8 +9,8 @@ import AuthContext from '../../context/auth';
 
 function SignInUpView() {
   const auth = useContext(AuthContext);
-
-  return auth.isGuest ? (
+  if (!auth.isGuest) return <Redirect to="/" />;
+  return (
     <ViewWrapper>
       <LogoWrapper>
         <img
@@ -18,6 +18,7 @@ function SignInUpView() {
           alt="logo 192px"
           style={{ marginBottom: 32, width: 64 }}
         />
+
         <h1 style={{ margin: '0 0 8px', fontWeight: 500 }}>
           Welcome to
           <br />
@@ -32,21 +33,15 @@ function SignInUpView() {
       </LogoWrapper>
 
       <Switch>
-        <Route
-          exact
-          path="/sign-in"
-          render={props => <SignInForm auth={auth} {...props} />}
-        />
+        <Route exact path="/sign-in">
+          <SignInForm auth={auth} />
+        </Route>
 
-        <Route
-          exact
-          path="/sign-up"
-          render={props => <SignUpForm auth={auth} {...props} />}
-        />
+        <Route exact path="/sign-up">
+          <SignUpForm auth={auth} />
+        </Route>
       </Switch>
     </ViewWrapper>
-  ) : (
-    <Redirect to="/" />
   );
 }
 

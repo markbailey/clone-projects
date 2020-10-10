@@ -47,6 +47,7 @@ function PeopleView({
               icon="arrow_back"
               title="Return to chat list"
               iconSize={24}
+              iconButton
               style={{ marginRight: 8 }}
               onClick={goBack}
             />
@@ -54,12 +55,18 @@ function PeopleView({
         }
       >
         {isTabletOrMobile ? (
-          <Button title="Add a contact" icon="person_add" iconSize={24} />
+          <Button
+            title="Add a contact"
+            icon="person_add"
+            iconSize={24}
+            iconButton
+          />
         ) : (
           <Button
             title="Create new message"
             icon="create"
             iconSize={24}
+            iconButton
             onClick={onCreateMessageClick}
             disabled={newChat}
           />
@@ -68,7 +75,6 @@ function PeopleView({
 
       <AsideContent>
         <SubHeading>Active Contacts ({contacts.length})</SubHeading>
-
         {contacts.length > 0 ? (
           <List>
             {contacts.map((contact, i) => (
@@ -81,7 +87,7 @@ function PeopleView({
       </AsideContent>
 
       {isTabletOrMobile ? (
-        <AsideNavbar onButtonClick={slug => navigateTo(slug)} />
+        <AsideNavbar activeIndex={1} onButtonClick={slug => navigateTo(slug)} />
       ) : null}
     </Aside>
   );

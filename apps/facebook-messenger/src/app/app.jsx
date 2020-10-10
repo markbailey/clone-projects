@@ -1,135 +1,71 @@
 import React, { useEffect, useContext, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Switch, Route } from 'react-router-dom';
-import MediaQuery, { useMediaQuery } from 'react-responsive';
+import { Link } from 'react-router-dom';
+import { /*MediaQuery,*/ useMediaQuery } from 'react-responsive';
 
-import ChatListView from '../views/chats';
-import PeopleView from '../views/people';
-import ChatView from '../views/chat';
+import Logo from '../components/logo';
+import Button from '../components/tags/button';
 import SplashView from '../views/splash';
-import { SignInUpView, ForgotPasswordView } from '../views/auth';
-
-import AuthorisedRoute from '../components/authorised-route';
-import withNavigation from '../components/hoc/withNavigation';
 
 import AuthContext from '../context/auth';
-import ChatContext from '../context/chat';
 import constants from '../constants';
 
-const propTypes = {
-  navigateTo: PropTypes.func.isRequired,
-  goBack: PropTypes.func.isRequired,
-};
+import Routes from './routes';
 
-function App({ location, navigateTo, goBack }) {
+function App() {
   const auth = useContext(AuthContext);
-  const { state: chatState } = useContext(ChatContext);
-  const [newChat, setNewChat] = useState(location.pathname.includes('new'));
   const [isLoading, setIsLoading] = useState(true);
 
-  const { messages } = chatState;
   const { breakpoints } = constants;
-
   const isTabletOrMobile = useMediaQuery({
     query: `(max-width: ${breakpoints.tablet.max}px)`,
   });
 
-  const Routes = ({ isGuest }) => (
-    <>
-      <Route
-        exact
-        path={['/sign-in', '/sign-up']}
-        render={props => <SignInUpView {...props} navigateTo={navigateTo} />}
-      />
-
-      <Route
-        exact
-        path="/forgot-password"
-        render={props => (
-          <ForgotPasswordView {...props} navigateTo={navigateTo} />
-        )}
-      />
-
-      <AuthorisedRoute
-        exact
-        path={['/people'].concat(
-          !isTabletOrMobile ? ['/people/new', '/people/t/:recipient'] : [],
-        )}
-        isGuest={isGuest}
-        render={props => (
-          <PeopleView
-            {...props}
-            newChat={newChat}
-            isTabletOrMobile={isTabletOrMobile}
-            onCreateNewMessage={() => setNewChat(true)}
-            navigateTo={navigateTo}
-            goBack={goBack}
-          />
-        )}
-      />
-
-      <AuthorisedRoute
-        exact
-        path={['/'].concat(!isTabletOrMobile ? ['/new', '/t/:recipient'] : [])}
-        isGuest={isGuest}
-        render={props => (
-          <ChatListView
-            {...props}
-            newChat={newChat}
-            isTabletOrMobile={isTabletOrMobile}
-            onCreateNewMessage={() => setNewChat(true)}
-            onCloseNewMessage={() => setNewChat(false)}
-            navigateTo={navigateTo}
-            goBack={goBack}
-          />
-        )}
-      />
-
-      <AuthorisedRoute
-        path={['/new', '/people/new', '/t/:recipient', '/people/t/:recipient']}
-        isGuest={isGuest}
-        render={props => (
-          <ChatView
-            {...props}
-            isNew={newChat}
-            goBack={() => {
-              if (newChat) setNewChat(false);
-              goBack();
-            }}
-          />
-        )}
-      />
-    </>
-  );
+  useEffect(() => {
+    console.log('App:Mounted!');
+  }, []);
 
   useEffect(() => {
     if (!auth.isLoading && isLoading) setIsLoading(false);
-  }, [auth.isLoading]);
+  }, [auth.isLoading, isLoading]);
 
-  useEffect(() => {
-    if (messages.length > 0 && !isTabletOrMobile && location.pathname === '/')
-      navigateTo(`/t/${messages[0].recipient}`);
-    // eslint-disable-next-line
-  }, [messages]);
-
-  return isLoading ? (
-    <SplashView />
-  ) : (
+  if (isLoading) return <SplashView />;
+  return (
     <>
-      {/** MOBILE AND TABLET */}
-      <MediaQuery maxDeviceWidth={breakpoints.tablet.max}>
-        <Switch>
-          <Routes isGuest={auth.isGuest} />
-        </Switch>
-      </MediaQuery>
-
-      {/** LAPTOP AND DESKTOP */}
-      <MediaQuery minDeviceWidth={breakpoints.laptop.min}>
-        <Routes isGuest={auth.isGuest} />
-      </MediaQuery>
+      {!isTabletOrMobile && !auth.isGuest ? (
+        <header
+          style={{
+            width: '100%',
+            height: 60,
+            display: 'flex',
+            padding: '8px 16px',
+            borderBottom: '1px solid rgb(221, 221, 221)',
+            boxShadow: '0 0 10px rgba(0,0,0, 0.10)',
+          }}
+        >
+          <Link to="/" style={{ width: 43 }}>
+            <Logo style={{ width: 'auto', height: '100%' }} />
+          </Link>
+          <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+            <div className="dropdown">
+              <Button
+                iconButton
+                icon="arrow_drop_down"
+                title="Account"
+                style={{ width: 43 }}
+                // onClick={goBack}
+              />
+              <div className="dropdown-content" style={{ right: 0 }}>
+                <Link to="/sign-out">Sign Out</Link>
+              </div>
+            </div>
+          </div>
+        </header>
+      ) : null}
+      <div style={{ display: 'flex', flex: 1 }}>
+        <Routes isGuest={auth.isGuest} isTabletOrMobile={isTabletOrMobile} />
+      </div>
     </>
   );
 }
 
-App.propTypes = propTypes;
-export default withNavigation(App);
+export default App;

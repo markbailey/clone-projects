@@ -46,6 +46,7 @@ function ChatGroup({ chat, onClick, onClose }) {
           title="Close"
           icon="close"
           iconSize={18}
+          iconButton
           onClick={onClose ?? null}
         />
       ) : null}

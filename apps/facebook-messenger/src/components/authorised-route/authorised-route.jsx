@@ -1,7 +1,14 @@
 import React from 'react';
 import { Route, Redirect, useLocation } from 'react-router-dom';
 
-const AuthorisedRoute = ({ render, component, exact, path, isGuest }) => {
+const AuthorisedRoute = ({
+  children,
+  render,
+  component,
+  exact,
+  path,
+  isGuest,
+}) => {
   const location = useLocation();
   const redirect =
     ['/sign-in', '/sign-up', '/forgot-password'].findIndex(path =>
@@ -13,7 +20,9 @@ const AuthorisedRoute = ({ render, component, exact, path, isGuest }) => {
       <Redirect to="/sign-in" />
     ) : null
   ) : (
-    <Route exact={exact} path={path} component={component} render={render} />
+    <Route exact={exact} path={path} component={component} render={render}>
+      {children}
+    </Route>
   );
 };
 

@@ -11,6 +11,7 @@ import {
 
 const initialState = {
   user: null,
+  isGuest: true,
   isLoading: true,
 };
 
@@ -28,6 +29,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         user: action.payload,
+        isGuest: false,
         isLoading: false,
       };
     case 'SIGN_UP_FAILURE':
@@ -46,6 +48,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         user: null,
+        isGuest: true,
         isLoading: false,
       };
     default:
@@ -64,8 +67,8 @@ export function AuthProvider({ children }) {
       const user = { id: snapshot.id, ...snapshot.data() };
       dispatch({ type: 'SIGN_IN_SUCCESS', payload: user });
       return user;
-    } catch (exception) {
-      dispatch({ type: 'SIGN_IN_FAILURE' });
+    } catch (error) {
+      dispatch({ type: 'SIGN_IN_FAILURE', payload: error });
       return null;
     }
   };
@@ -73,6 +76,7 @@ export function AuthProvider({ children }) {
   const signIn = async ({ emailAddress, password }) => {
     dispatch({ type: 'SIGN_IN_START' });
     try {
+      console.log(emailAddress, password);
       const { user: userAuth } = await auth.signInWithEmailAndPassword(
         emailAddress,
         password,
@@ -81,7 +85,7 @@ export function AuthProvider({ children }) {
       await getSnapshotFromUserAuth(userAuth);
       return true;
     } catch (error) {
-      dispatch({ type: 'SIGN_IN_FAILURE', error });
+      dispatch({ type: 'SIGN_IN_FAILURE', payload: error });
       return false;
     }
   };
@@ -89,12 +93,14 @@ export function AuthProvider({ children }) {
   const signInWithGoogle = async () => {
     dispatch({ type: 'SIGN_IN_START' });
     try {
-      const { user: userAuth } = auth.signInWithPopup(googleSignInProvider);
+      const { user: userAuth } = await auth.signInWithPopup(
+        googleSignInProvider,
+      );
 
       await getSnapshotFromUserAuth(userAuth);
       return true;
     } catch (error) {
-      dispatch({ type: 'SIGN_IN_FAILURE', error });
+      dispatch({ type: 'SIGN_IN_FAILURE', payload: error });
       return false;
     }
   };
@@ -108,7 +114,7 @@ export function AuthProvider({ children }) {
         return true;
       })
       .catch(error => {
-        dispatch({ type: 'SIGN_OUT_FAILURE', error });
+        dispatch({ type: 'SIGN_OUT_FAILURE', payload: error });
         return false;
       });
   };
@@ -123,35 +129,36 @@ export function AuthProvider({ children }) {
 
       return await getSnapshotFromUserAuth(userAuth, { displayName });
     } catch (error) {
-      dispatch({ type: 'SIGN_UP_FAILURE', error });
+      dispatch({ type: 'SIGN_UP_FAILURE', payload: error });
       return false;
     }
   };
 
   const verify = async () => {
+    dispatch({ type: 'VERIFY_START' });
     try {
       const userAuth = await getCurrentUser();
       if (!userAuth) {
         dispatch({ type: 'VERIFY_FAILURE' });
-        return;
+        return false;
       }
 
       return await getSnapshotFromUserAuth(userAuth);
     } catch (error) {
-      dispatch({ type: 'SIGN_IN_FAILURE', error });
+      dispatch({ type: 'VERIFY_FAILURE', payload: error });
       return false;
     }
   };
 
   useEffect(() => {
     verify();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <AuthContext.Provider
       value={{
         ...state,
-        isGuest: state.user === null,
         signUp,
         signIn,
         signInWithGoogle,

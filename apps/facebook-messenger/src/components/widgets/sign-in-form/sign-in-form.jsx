@@ -12,15 +12,16 @@ function SignInForm({ auth }) {
 
   const onFormSubmit = async event => {
     event.preventDefault();
+
     setIsSigningIn(true);
-    await auth.signIn({ emailAddress, password });
-    setIsSigningIn(false);
+    const response = await auth.signIn({ emailAddress, password });
+    if (!response) setIsSigningIn(false);
   };
 
   const onSignInWithGoogleClicked = async () => {
     setIsSigningIn(true);
-    await auth.signInWithGoogle();
-    setIsSigningIn(false);
+    const response = await auth.signInWithGoogle();
+    if (!response) setIsSigningIn(false);
   };
 
   return (
@@ -40,6 +41,7 @@ function SignInForm({ auth }) {
           id="currentEmailAddress"
           name="currentEmailAddress"
           value={emailAddress}
+          placeholder="e.g. joebloggs@hotmail.com"
           onChange={e => setEmailAddress(e.target.value)}
           required
           pattern="(.*)@(\w{3,})(.\w{2,}){1,}"
@@ -58,6 +60,7 @@ function SignInForm({ auth }) {
           id="currentPassword"
           name="currentPassword"
           value={password}
+          helpText=""
           onChange={e => setPassword(e.target.value)}
           required
           endAdornment={
@@ -75,7 +78,7 @@ function SignInForm({ auth }) {
       </div>
 
       <Button type="submit" block primary disabled={isSigningIn}>
-        {isSigningIn ? 'Signing in...' : 'Sign in with email'}
+        Sign in with email
       </Button>
 
       <div
@@ -119,7 +122,12 @@ function SignInForm({ auth }) {
         </h5>
       </div>
 
-      <Button block onClick={onSignInWithGoogleClicked} disabled={isSigningIn}>
+      <Button
+        type="button"
+        block
+        onClick={onSignInWithGoogleClicked}
+        disabled={isSigningIn}
+      >
         Sign in with Google
       </Button>
     </form>

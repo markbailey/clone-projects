@@ -44,6 +44,31 @@ export function PeopleProvider({ children }) {
       sentTimestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
 
+  /**
+   * FIND PEOPLE
+   *
+   * DUE to the restrictions of Firestore queries (Not supporting partial field filtering),
+   * the size of the users table and this project being a test only.
+   * I have the function return all users then filter them instead of using a where clause.
+   * I did not wish to add a third aprty search (Paid).
+   *
+   * @param {*} searchCriteria
+   */
+  const findPeople = async searchCriteria =>
+    searchCriteria
+      ? await firestore
+          .collection('users')
+          .get()
+          .then(({ docs }) =>
+            docs
+              .map(doc => ({ id: doc.id, ...doc.data() }))
+              .filter(
+                doc =>
+                  doc.id != user.id && doc.displayName.includes(searchCriteria),
+              ),
+          )
+      : [];
+
   useEffect(() => {
     if (user) {
       firestore
@@ -72,7 +97,7 @@ export function PeopleProvider({ children }) {
   }, [user]);
 
   return (
-    <PeopleContext.Provider value={{ state, sendFriendRequest }}>
+    <PeopleContext.Provider value={{ state, sendFriendRequest, findPeople }}>
       {children}
     </PeopleContext.Provider>
   );

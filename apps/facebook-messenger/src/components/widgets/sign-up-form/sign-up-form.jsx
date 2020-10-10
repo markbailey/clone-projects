@@ -35,6 +35,7 @@ function SignUpForm({ auth }) {
           id="newDisplayName"
           name="newDisplayName"
           value={displayName}
+          placeholder="e.g. Joebloggs"
           onChange={e => setDisplayName(e.target.value)}
           required
           // pattern="(.*)@(\w{3,})(.\w{2,}){1,}"
@@ -53,6 +54,7 @@ function SignUpForm({ auth }) {
           id="newEmailAddress"
           name="newEmailAddress"
           value={emailAddress}
+          placeholder="e.g. joebloggs@hotmail.com"
           onChange={e => setEmailAddress(e.target.value)}
           required
           pattern="(.*)@(\w{3,})(.\w{2,}){1,}"

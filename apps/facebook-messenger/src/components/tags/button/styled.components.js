@@ -5,7 +5,7 @@ export const ButtonElement = styled.button `
   justify-content: center;
   align-items: center;
   border: 1px solid #ddd;
-  cursor: ${props => (props.disabled ? 'default' : 'pointer')};
+  // cursor: ${props => (props.disabled ? 'default' : 'pointer')};
   // outline: 0;
   font-size: 14px;
   text-transform: uppercase;

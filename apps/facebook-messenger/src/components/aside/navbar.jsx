@@ -4,21 +4,23 @@ import Icon from '../tags/icon';
 
 import { NavbarWrapper, NavbarButton } from './styled.components';
 
-function Navbar({ onButtonClick }) {
+function Navbar({ onButtonClick, activeIndex }) {
   return (
     <NavbarWrapper>
       <NavbarButton
-        icon={<Icon name="chat_bubble" />}
-        onClick={() => onButtonClick('/')}
+        icon={<Icon name="chat_bubble" size={24} />}
+        onClick={activeIndex != 0 ? () => onButtonClick('/') : null}
+        style={{ color: activeIndex === 0 ? '#222' : '#aaa' }}
       >
-        <span>Chats</span>
+        <small>Chats</small>
       </NavbarButton>
 
       <NavbarButton
-        icon={<Icon name="people" />}
-        onClick={() => onButtonClick('people')}
+        icon={<Icon name="people" size={24} />}
+        onClick={activeIndex != 1 ? () => onButtonClick('people') : null}
+        style={{ color: activeIndex === 1 ? '#222' : '#aaa' }}
       >
-        <span>People</span>
+        <small>People</small>
       </NavbarButton>
     </NavbarWrapper>
   );
