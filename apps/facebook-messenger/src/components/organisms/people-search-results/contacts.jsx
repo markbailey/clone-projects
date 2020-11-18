@@ -2,6 +2,7 @@ import React, {  useContext } from 'react';
 
 import { SubHeading } from '../aside/styled.components';
 import Person from '../../molecules/person';
+import ItemList from '../../molecules/item-list';
 
 import PeopleContext from '../../../context/people';
 
