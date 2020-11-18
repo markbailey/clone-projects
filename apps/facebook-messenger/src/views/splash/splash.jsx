@@ -15,7 +15,8 @@ function SplashView() {
       </LogoWrapper>
 
       <PoweredByWrapper>
-        <small>Powered by</small>
+        <small>Powered by</small><br />
+        <span>Mark Bailey</span>
       </PoweredByWrapper>
     </ViewWrapper>
   );
