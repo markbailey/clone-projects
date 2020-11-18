@@ -2,8 +2,8 @@ import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { /*MediaQuery,*/ useMediaQuery } from 'react-responsive';
 
-import Logo from '../components/logo';
-import Button from '../components/tags/button';
+import Logo from '../components/atoms/logo';
+import Button from '../components/atoms/button';
 import SplashView from '../views/splash';
 
 import AuthContext from '../context/auth';

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import SignInForm from '../../components/widgets/sign-in-form';
-import SignUpForm from '../../components/widgets/sign-up-form';
+import SignInForm from '../../components/organisms/sign-in-form';
+import SignUpForm from '../../components/organisms/sign-up-form';
 
 import { ViewWrapper, LogoWrapper } from './styled.components';
 import AuthContext from '../../context/auth';

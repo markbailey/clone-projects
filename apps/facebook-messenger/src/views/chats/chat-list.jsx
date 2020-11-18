@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ChatGroup from '../../components/chat-group';
-import { List, ListItem } from '../../components/styled';
+import ChatGroup from '../../components/molecules/chat-group';
+import ItemList from '../../components/molecules/item-list';
 
 import { NoResultsWrapper } from './styled.components';
 
@@ -28,16 +28,13 @@ function ChatList({ items, newChat, onCloseMessageClick, onGroupClick }) {
           <span>No messages found</span>
         </NoResultsWrapper>
       ) : (
-        <List>
-          {items.map((chat, i) => (
-            <ListItem key={`chat_${i}`}>
-              <ChatGroup
-                chat={chat}
-                onClick={() => onGroupClick(`t/${chat.recipient}`)}
-              />
-            </ListItem>
-          ))}
-        </List>
+        <ItemList
+          component={(item) => <ChatGroup
+            chat={item}
+            onClick={() => onGroupClick(`t/${item.recipient}`)}
+          />}
+          items={items}
+        />
       )}
     </>
   );

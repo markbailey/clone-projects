@@ -1,8 +1,8 @@
 import React, { /*useContext,*/ useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Input from '../../components/tags/input';
-import Button from '../../components/tags/button';
+import Input from '../../components/atoms/input';
+import Button from '../../components/atoms/button';
 
 import { ViewWrapper, LogoWrapper } from './styled.components';
 // import AuthContext from '../../context/auth';

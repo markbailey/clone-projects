@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Input from '../../tags/input';
-import Button from '../../tags/button';
+import Input from '../../atoms/input';
+import Button from '../../atoms/button';
 
 function SignInForm({ auth }) {
   const [emailAddress, setEmailAddress] = useState('');

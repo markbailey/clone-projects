@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useMediaQuery } from 'react-responsive';
 
-import constants from '../../constants';
+import constants from '../../../constants';
 import { ViewWrapper } from './styled.components';
 
 const propTypes = {

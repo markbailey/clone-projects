@@ -2,7 +2,7 @@ import React, { useState /*lazy*/ } from 'react';
 import { Switch, Route } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
-import AuthorisedRoute from '../components/authorised-route';
+import AuthorisedRoute from '../components/atoms/authorised-route';
 import withNavigation from '../components/hoc/withNavigation';
 
 // const { SignInUpView, ForgotPasswordView } = lazy(() =>

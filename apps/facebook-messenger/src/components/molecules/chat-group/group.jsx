@@ -3,10 +3,10 @@ import 'styled-components/macro';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Icon from '../tags/icon';
-import Button from '../tags/button';
+import Icon from '../../atoms/icon';
+import Button from '../../atoms/button';
 
-import { noPointerEvents } from '../../css.stylesheet';
+import { noPointerEvents } from '../../../css.stylesheet';
 
 import {
   NewMessageWrapper,
@@ -19,7 +19,6 @@ const propTypes = {
   onClick: PropTypes.func.isRequired,
   onClose: PropTypes.func,
 };
-
 function ChatGroup({ chat, onClick, onClose }) {
   const Wrapper = chat ? ChatGroupWrapper : NewMessageWrapper;
 

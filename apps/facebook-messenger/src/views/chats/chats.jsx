@@ -8,11 +8,11 @@ import Aside, {
   AsideHeader,
   AsideContent,
   AsideNavbar,
-} from '../../components/aside';
-import Input from '../../components/tags/input';
-import Icon from '../../components/tags/icon';
-import Button from '../../components/tags/button';
-import PeopleSearchResults from '../../components/people-search-results';
+} from '../../components/organisms/aside';
+import Input from '../../components/atoms/input';
+import Icon from '../../components/atoms/icon';
+import Button from '../../components/atoms/button';
+import { ContactSearchResults, PeopleSearchResults } from '../../components/organisms/people-search-results';
 
 import ChatContext from '../../context/chat';
 
@@ -117,7 +117,10 @@ function ChatsView({
         </SearchBoxWrapper>
 
         {searchFocused ? (
-          <PeopleSearchResults criteria={searchCriteria} />
+          <>
+            <ContactSearchResults criteria={searchCriteria} defaultResults={[]} />
+            <PeopleSearchResults criteria={searchCriteria} />
+          </>
         ) : (
           <ChatList
             items={chats}

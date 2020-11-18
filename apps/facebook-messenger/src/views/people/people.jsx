@@ -1,18 +1,13 @@
 import React, { useContext, memo } from 'react';
 import PropTypes from 'prop-types';
 
-import Button from '../../components/tags/button';
+import Button from '../../components/atoms/button';
 import Aside, {
   AsideHeader,
   AsideContent,
   AsideNavbar,
-} from '../../components/aside';
-import Person from '../../components/person';
-
-import { SubHeading } from '../../components/aside/styled.components';
-import { List, ListItem } from '../../components/styled';
-
-import PeopleContext from '../../context/people';
+} from '../../components/organisms/aside';
+import { ContactSearchResults } from '../../components/organisms/people-search-results';
 
 const propTypes = {
   newChat: PropTypes.bool,
@@ -29,9 +24,6 @@ function PeopleView({
   navigateTo,
   goBack,
 }) {
-  const { state: peopleState } = useContext(PeopleContext);
-  const { contacts } = peopleState;
-
   const onCreateMessageClick = () => {
     onCreateNewMessage();
     navigateTo('new');
@@ -74,16 +66,7 @@ function PeopleView({
       </AsideHeader>
 
       <AsideContent>
-        <SubHeading>Active Contacts ({contacts.length})</SubHeading>
-        {contacts.length > 0 ? (
-          <List>
-            {contacts.map((contact, i) => (
-              <ListItem key={`contact_${i}`} noPadding>
-                <Person {...contact} />
-              </ListItem>
-            ))}
-          </List>
-        ) : null}
+        <ContactSearchResults title="Active Contacts" />
       </AsideContent>
 
       {isTabletOrMobile ? (

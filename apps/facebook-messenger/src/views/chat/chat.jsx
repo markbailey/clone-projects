@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 
-import Input from '../../components/tags/input';
-import Icon from '../../components/tags/icon';
-import Button from '../../components/tags/button';
-import Message from '../../components/chat-message';
+import Input from '../../components/atoms/input';
+import Icon from '../../components/atoms/icon';
+import Button from '../../components/atoms/button';
+import Message from '../../components/molecules/chat-message';
 
 import ChatContext from '../../context/chat';
 import constants from '../../constants';

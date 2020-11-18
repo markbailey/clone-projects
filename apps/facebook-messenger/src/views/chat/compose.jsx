@@ -5,8 +5,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Picker } from 'emoji-mart';
 
-import Button from '../../components/tags/button';
-import Input from '../../components/tags/input';
+import Button from '../../components/atoms/button';
+import Input from '../../components/atoms/input';
 import { marginLeft /*, marginRight*/ } from '../../css.stylesheet';
 
 import { ComposeMessageForm } from './styled.components';
