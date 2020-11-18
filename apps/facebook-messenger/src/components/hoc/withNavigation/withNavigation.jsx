@@ -10,7 +10,6 @@ function withNavigation(WrappedComponent) {
 
     const navigateTo = slug => {
       const newReturnHistory = [...returnHistory];
-
       const current = location.pathname;
       const segments = current.split('/').filter(i => i);
       const chatIndex = segments.indexOf('t');
