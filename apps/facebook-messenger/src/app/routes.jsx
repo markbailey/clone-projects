@@ -6,17 +6,17 @@ import AuthorisedRoute from '../components/atoms/authorised-route';
 import withNavigation from '../components/hoc/withNavigation';
 
 // const { SignInUpView, ForgotPasswordView } = lazy(() =>
-//   import('../views/auth'),
+//   import('../pages/auth'),
 // );
-// const ChatListView = lazy(() => import('../views/chats'));
-// const PeopleView = lazy(() => import('../views/people'));
-// const ChatView = lazy(() => import('../views/chat'));
+// const ChatListView = lazy(() => import('../pages/chats'));
+// const PeopleView = lazy(() => import('../pages/people'));
+// const ChatView = lazy(() => import('../pages/chat'));
 
-// import PageNotFound from '../views/error/404';
-import { SignInUpView, SignOutView, ForgotPasswordView } from '../views/auth';
-import ChatListView from '../views/chats';
-import PeopleView from '../views/people';
-import ChatView from '../views/chat';
+// import PageNotFound from '../pages/error/404';
+import { SignInUpView, SignOutView, ForgotPasswordView } from '../pages/auth';
+import ChatListView from '../pages/chats';
+import PeopleView from '../pages/people';
+import ChatView from '../pages/chat';
 
 const withSwitch = WrappedComponent =>
   function (props) {

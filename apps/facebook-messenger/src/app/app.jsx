@@ -4,7 +4,7 @@ import { /*MediaQuery,*/ useMediaQuery } from 'react-responsive';
 
 import Logo from '../components/atoms/logo';
 import Button from '../components/atoms/button';
-import SplashView from '../views/splash';
+import SplashView from '../pages/splash';
 
 import AuthContext from '../context/auth';
 import constants from '../constants';
