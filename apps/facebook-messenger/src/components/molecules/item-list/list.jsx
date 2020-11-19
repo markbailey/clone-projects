@@ -5,7 +5,7 @@ import { List, ListItem } from '../../../components/styled';
 import randomString from '../../../utils/randomString';
 
 const propTypes = {
-  component: PropTypes.node.isRequired,
+  component: PropTypes.func.isRequired,
   items: PropTypes.array,
 };
 
