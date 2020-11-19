@@ -35,10 +35,6 @@ function reducer(state = initialState, action) {
     case 'SIGN_UP_FAILURE':
     case 'SIGN_IN_FAILURE':
     case 'SIGN_OUT_FAILURE':
-      return {
-        ...state,
-        isLoading: false,
-      };
     case 'VERIFY_FAILURE':
       return {
         ...state,
