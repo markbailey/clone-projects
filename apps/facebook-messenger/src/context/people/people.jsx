@@ -64,7 +64,7 @@ export function PeopleProvider({ children }) {
               .map(doc => ({ id: doc.id, ...doc.data() }))
               .filter(
                 doc =>
-                  doc.id !== user.id && doc.displayName.includes(searchCriteria),
+                  doc.id !== user.id && doc.displayName.toLowerCase().includes(searchCriteria.toLowerCase()),
               ),
           )
       : [];

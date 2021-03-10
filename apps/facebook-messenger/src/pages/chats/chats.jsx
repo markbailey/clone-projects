@@ -81,7 +81,7 @@ function ChatsView({
 
         {!isTabletOrMobile ? (
           <Button
-            title="People"
+            title="Active Contacts"
             icon="people"
             iconSize={24}
             iconButton
@@ -118,7 +118,7 @@ function ChatsView({
 
         {searchFocused ? (
           <>
-            <ContactSearchResults criteria={searchCriteria} defaultResults={[]} />
+            <ContactSearchResults criteria={searchCriteria} />
             <PeopleSearchResults criteria={searchCriteria} />
           </>
         ) : (

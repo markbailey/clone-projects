@@ -17,7 +17,7 @@ export default function ContactSearchResults({ title, criteria, defaultResults }
     <>
       <SubHeading>{title || 'Contacts'} ({filteredContacts.length})</SubHeading>
       <ItemList
-          component={(item) => <Person {...item} />}
+          component={({ item }) => <Person {...item} />}
           items={filteredContacts}
         />
     </>

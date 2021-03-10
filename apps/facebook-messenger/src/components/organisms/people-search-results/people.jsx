@@ -26,7 +26,7 @@ function SearchResults({ criteria }) {
       <>
         <SubHeading>People ({people.length})</SubHeading>
         <ItemList
-          component={(item) => <Person {...item} />}
+          component={({ item }) => <Person {...item} />}
           items={people}
         />
       </>
