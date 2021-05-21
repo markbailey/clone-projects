@@ -3,7 +3,6 @@
   "private": true,
   "scripts": {
     "messenger": "lerna run --scope=facebook-messenger start",
-    "netflix": "lerna run --scope=netflix start"
   },
   "dependencies": {},
   "devDependencies": {
